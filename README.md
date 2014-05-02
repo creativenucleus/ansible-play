@@ -16,6 +16,7 @@ This is our Ansible host
 > Shared folder: Host[/vagrant/share/controller]  
 > SSH: 127.0.0.1:2200 (User: vagrant:vagrant)  
 > Private network IP: 192.168.50.101  
+> Public HTTP: http://127.0.0.1:8081/
 
 ### Managed
 
@@ -24,6 +25,7 @@ This is the machine managed by the Ansible controller
 > Shared folder: Host[/vagrant/share/managed]  
 > SSH: 127.0.0.1:2201 (User: vagrant:vagrant)  
 > Private network IP: 192.168.50.102  
+> Public HTTP: http://127.0.0.1:8082/
 
 ## Setup
 
@@ -36,10 +38,12 @@ SSH into the controller machine (with vagrant ssh controller, or using PuTTY)
 > sudo apt-get install sshpass  
 
 Copy / write:  
-> files/etc-ansible-hosts to etc/ansible/hosts  
+> files/etc/ansible/hosts to etc/ansible/hosts
+(You might need to make end of line adjustments)
 
 Copy / write:  
 > files/playbook1.yml to /home/vagrant/playbook1.yml  
+(You might need to make end of line adjustments)
 
 
 ## Run

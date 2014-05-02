@@ -5,25 +5,44 @@
     max_clients: 200
   remote_user: root
   sudo: yes
+
   tasks:
   - name: Apt | Update
     apt: update_cache=yes cache_valid_time=3600
+
   - name: Apache | Present
     apt: name=apache2 state=present
-#  - name: write the apache config file
-#    template: src=/srv/httpd.j2 dest=/etc/httpd.conf
     notify:
     - Apache | Restart
+
+#  - name: write the apache config file
+#    template: src=/srv/httpd.j2 dest=/etc/httpd.conf
+
   - name: Apache | Running
     service: name=apache2  state=started
+
+  - name: Nginx | Present
+    apt: name=nginx state=present
+    notify:
+    - Nginx | Restart
+
+  - name: Nginx | Running
+    service: name=nginx state=started
+
   - name: PHP | Install
     apt: name=libapache2-mod-php5 state=present
     notify: Apache | Restart
+
   - name: MySQL | Install
     apt: name=mysql-server state=present
+
   - name: PHP-MySQL Bindings | Install
     apt: name=php5-mysql state=present
     notify: Apache | Restart
+
   handlers:
     - name: Apache | Restart
       service: name=apache2 state=restarted
+
+    - name: Nginx | Restart
+      service: name=nginx state=restarted
