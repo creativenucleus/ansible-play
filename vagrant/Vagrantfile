@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "controller", primary: true do |controller|
     controller.vm.box = "precise64"
     controller.vm.network "private_network", ip: "192.168.50.101"
-	controller.vm.synced_folder "../vagrant/share/controller", "/share",
+	controller.vm.synced_folder "./share/controller", "/share",
 	  create: true
     controller.vm.network "forwarded_port", guest: 80, host: 8081
   end
@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "managed" do |managed|
     managed.vm.box = "precise64"
     managed.vm.network "private_network", ip: "192.168.50.102"
-	managed.vm.synced_folder "./vagrant/share/managed", "/share",
+	managed.vm.synced_folder "./share/managed", "/share",
 	  create: true
     managed.vm.network "forwarded_port", guest: 80, host: 8082
   end
